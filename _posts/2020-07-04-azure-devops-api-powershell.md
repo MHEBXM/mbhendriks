@@ -14,9 +14,7 @@ Personal access token is located below the user settings:
 
 ![user settings]({{ site.baseurl }}/images/api/pat1.png "user settings")
 
-To create a new personal access token, just choose "new token" and the "create a new personal access token" page will appear.  
-Choose a name for the personal access token, select an organization and assign the right level of access to the personal access token.  
-If the shown level of access is not granular enough, choose "show all scopes" to extend the permissions screen.  
+To create a new personal access token, just choose "new token" and the "create a new personal access token" page will appear. Choose a name for the personal access token, select an organization and assign the right level of access to the personal access token. If the shown level of access is not granular enough, choose "show all scopes" to extend the permissions screen.  
 It is common to assign the minimal permissions to the PAT.  
 In the screen dump below, the option "all accessible organizations" is selected. One should of course choose his/her organization.
 
@@ -41,11 +39,17 @@ $header = @{"Authorization" = "Basic "+[System.Convert]::ToBase64String([System.
 
 ### URL
 
-The URL to use to make the API call can be found on the documentation pages of de [Azure DevOps REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1). There are multiple API versions available and also some of them are still in preview. If you for instance want list all the builds in a certain project, you could use the following [URL](https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.1):  
-GET https://dev.azure.com/$organization/$project/_apis/build/builds?api-version=5.1  
-Where $organizarion is the name of the Azure DevOps organization and $project is the name of the project within the Azure DevOps organization.
+The URL to use to make the API call can be found on the documentation pages of de [Azure DevOps REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1). There are multiple API versions available and also some of them are still in preview.  
+If you for instance want list all the builds in a certain project, you could use the following [URL](https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.1) and the GET method:
+
+$uri = "https://dev.azure.com/$organization/$project/_apis/build/builds?api-version=5.1"  
+
+Where $organization is the name of the Azure DevOps organization and $project is the name of the project within the Azure DevOps organization.
 
 ### Putting it all together
 
+Now it's time to put all the pieces together and perform the API request. For this, we use the "Invoke-RestMethod" command of PowerShell. Based on the variables we created in the previous sections, the command should be:
 
+$pipelines = (Invoke-RestMethod -Method GET -Uri $uri -Header $header).value  
 
+The variable $pipelines is an array which contains the history of all the builds.
