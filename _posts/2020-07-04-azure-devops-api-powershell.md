@@ -41,6 +41,7 @@ $header = @{"Authorization" = "Basic "+[System.Convert]::ToBase64String([System.
 
 ### URL
 
+REST API
 
 ### Putting it all together
 
