@@ -2,8 +2,6 @@
 layout: post
 title: Azure DevOps REST API and PowerShell
 ---
-### Introduction
-
 There are multiple approaches you can take to set up, configure and manage Azure DevOps. There are also multiple tools you can use. You can use the Azure Cli with the [Azure DevOps extension](https://github.com/Azure/azure-devops-cli-extension), the VSTeam extension from the [PowerShell Gallery](https://www.powershellgallery.com/packages/VSTeam/5.0.0) or make use of [API calls](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1) to set up, configure and manage Azure DevOps.  
 On this page I will describe how you can use PowerShell to make a call to the REST API of Azure DevOps. To make the API call you will need the URL for the API call, the method (POST, GET, etc.) you want to use and a header which is used for the authentication towards the API.
 
