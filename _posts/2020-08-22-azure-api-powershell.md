@@ -63,9 +63,9 @@ $resourcegroupname = "myfirstresourcegroup2208"
 
 We need to construct the header for the request:  
 
-$Headers=@{
-  'authorization'="Bearer $token"
-  'host'="management.azure.com"
+$Headers=@{  
+  'authorization'="Bearer $token"  
+  'host'="management.azure.com"  
 }
 
 And we need to construct the body for the REST API request.  
