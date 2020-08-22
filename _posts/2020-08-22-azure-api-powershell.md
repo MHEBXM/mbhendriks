@@ -3,19 +3,22 @@ layout: post
 title: Azure REST API and PowerShell
 ---
 There are many ways to manage resources on Azure and there are also many tools one can use. For example you can make use of the [Azure Portal](https://portal.azure.com), PowerShell with the [Az extensions](https://www.powershellgallery.com/packages/Az/4.5.0), [Azure CLI](https://docs.microsoft.com/nl-nl/cli/azure/install-azure-cli?view=azure-cli-latest) or make use of the [Azure REST API](https://docs.microsoft.com/en-us/rest/api/azure/) to manage resources onm Azure.  
-On this page I will describe how you can use PowerShell to make a call to the REST API of Azure. To make the API call you will need the URL for the API call, the method (POST, GET, etc.) you want to use, in some cases the body of the message and a header which is used for the authentication towards the API.
+On this page I will describe how you can use PowerShell to make a call to the REST API of Azure. To make the API call you will need the URL for the API call, the method (POST, GET, etc.) you want to use, the body of the message and a header which is used for authentication towards the API.
 
 ### Authentication
 
 To authenticate to the REST API, we need the id of a user or service principal ($clientid), the corresponding secret ($secretid) and the id of the tenant ($tenantid). The service principal or user should also have assigned the permissions needed to perform the tasks.  
-When we have the $clientid, $secretid and $tenantid, we can authenticate against the Azure REST API.  
+When we have the $clientid, $secretid and $tenantid, we can authenticate against the REST API.  
 
 1) Construct the URI  
-First we need to construct the URI to we are going to authenticate. This URI is constucted the follow way:  
+
+First we need to construct the URI to which we are going to authenticate. This URI is constucted the follow way:
+
 $tokenUri = "https://login.microsoftonline.com/$tenantid/oauth2/token"  
 
 2) Construct the body  
-Now we can construct the body. The body will be sent to the URI to which we will authenticate. The body is constructed the follow way:  
+Now we can construct the body. The body will be sent to the URI to which we will authenticate. The body is constructed the follow way:
+
 $tokenBody = @{  
     client_id     = $clientId  
     resource         = "https://management.azure.com/"  
