@@ -53,13 +53,13 @@ $resourcegroups = Invoke-RestMethod -Method GET -Uri $uri -Headers @{Authorizati
 ### Create a resource group
 
 Besides retreiving a list of resource groups, we can also create a new resource group through the Azure REST API.  
-Again, we need the [URI](https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/createorupdate):
-
-$uri = "https://management.azure.com/subscriptions/$subscriptionId/resourcegroups/${resourcegroupname}?api-version=2020-06-01"
-
 We need to assign a value to the variable $resourcegroupname:  
 
 $resourcegroupname = "myfirstresourcegroup2208"
+
+Again, we need the [URI](https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/createorupdate):
+
+$uri = "https://management.azure.com/subscriptions/$subscriptionId/resourcegroups/${resourcegroupname}?api-version=2020-06-01"
 
 We need to construct the header for the request:  
 
