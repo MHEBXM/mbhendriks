@@ -54,18 +54,21 @@ $resourcegroups = Invoke-RestMethod -Method GET -Uri $uri -Headers @{Authorizati
 
 Besides retreiving a list of resource groups, we can also create a new resource group through the Azure REST API.
 Again, we need the [URI](https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/createorupdate):
+
 $uri = "https://management.azure.com/subscriptions/$subscriptionId/resourcegroups/${resourcegroupname}?api-version=2020-06-01"
 
-We have to assign a value to the variable $resourcegroupname:
+We need to assign a value to the variable $resourcegroupname:  
 $resourcegroupname = "myfirstresourcegroup2208"
 
-We have to construct the header for the request:
+We need to construct the header for the request:
+
 $Headers=@{
   'authorization'="Bearer $token"
   'host'="management.azure.com"
 }
 
 And we need to construct the body for the REST API request. The body contains the properties for the resource group, for example:
+
 $body='{
     "location": "westeurope",
      "tags": {
@@ -74,12 +77,15 @@ $body='{
     }
  }'
 
-At last we can put all teh pieces together and perform the request to the Azure REST API:
+At last we can put all the pieces together and perform the request to the Azure REST API:
+
 $output = Invoke-RestMethod  -Uri $uri -Headers $Headers -ContentType "application/json" -Method PUT -Body $body
 
-The resource group may be created noe, but we are not sure. The first thibg we can verify is if the REST API call is succesfull or not. We can verify this by viewing at the value of $output.properties
-When the output is "succeeded", that  means that de REST API call was succesfull. It does not mean that the resource group is created.
+The resource group may be created now, but we are not sure. The first thing we can verify is if the REST API call is succesfull or not. We can verify this by viewing at the value of $output.properties..
+When the output is "succeeded", that  means that de REST API call was succesfull. It does not mean that the resource group is created.  
 To verify if the resource group is created we can do the REST API call, like before:
+
 $uri = "https://management.azure.com/subscriptions/$subscriptionid/resourcegroups?api-version=2020-06-01"
 (Invoke-RestMethod -Method GET -Uri $uri -Headers @{Authorization = "Bearer $token" }).value | Where-Object {$_.name -eq $resourcegroupname}
+
 We should now get output containing the name and additional properties of the resource group we did just create.
