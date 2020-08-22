@@ -11,12 +11,14 @@ To authenticate to the REST API, we need the id of a user or service principal (
 When we have the $clientid, $secretid and $tenantid, we can authenticate against the REST API.  
 
 #### Construct the URI
-First we need to construct the URI to which we are going to authenticate. This URI is constucted the follow way:
+First we need to construct the URI to which we are going to authenticate.  
+This URI is constucted the follow way:
 
 $tokenUri = "https://login.microsoftonline.com/$tenantid/oauth2/token"  
 
 #### Construct the body
-Now we can construct the body. The body will be sent to the URI to which we will authenticate. The body is constructed the follow way:
+Now we can construct the body. The body will be sent to the URI to which we will authenticate.  
+The body is constructed the follow way:
 
 $tokenBody = @{  
     client_id     = $clientId  
@@ -26,7 +28,8 @@ $tokenBody = @{
 }  
 
 #### Get OAuth 2.0 Token
-It is time to get the OAuth token.  To perform actions on Azure by using the REST API, the token will be send with the request to the REST API to perform actions on Azure.  
+It is time to get the OAuth token.  
+To perform actions on Azure by using the REST API, the token will be send with the request to the REST API to perform actions on Azure.  
 First we sent a request to get a token:
 
 $tokenRequest = Invoke-WebRequest -Method Post -Uri $tokenUri -ContentType "application/x-www-form-urlencoded" -Body $tokenBody -UseBasicParsing  
@@ -37,13 +40,13 @@ $token = ($tokenRequest.Content | ConvertFrom-Json).access_token
 ### Request all resource groups
 
 Now that we have the token, we can request information from Azure through the Azure REST API. The most difficult parts are how to get the URI to use and how to construct the body. A good place to start is the official documentation regarding the [Azure REST API](https://docs.microsoft.com/en-us/rest/api/azure/) and look for the Azure resource you want to perform an action on.
-For instance the information to get a list of all resource groups, is locatied [here](https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/list).
+For instance the information to get a list of all resource groups, is locatied [here](https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/list).  
 
-Based on the documentation, the URI we should use to retrieve a list of all the resource groups that are available in the subscription, we should use the follow URI:
-$uri = "https://management.azure.com/subscriptions/$subscriptionid/resourcegroups?api-version=2020-06-01"
+Based on the documentation, the URI we should use to retrieve a list of all the resource groups that are available in the subscription, we should use the follow URI:  
+$uri = "https://management.azure.com/subscriptions/$subscriptionid/resourcegroups?api-version=2020-06-01"  
 Where $subscriptionid is the id of the subscription off which we want to retrieve the resource groups.
 
-Now that we have both the URI and the OAuth token, we can perform a REST API call to retrieve all the resource groups of the subscription:
+Now that we have both the URI and the OAuth token, we can perform a REST API call to retrieve all the resource groups of the subscription:  
 $resourcegroups = Invoke-RestMethod -Method GET -Uri $uri -Headers @{Authorization = "Bearer $token" }
 
 ### Create a resource group
