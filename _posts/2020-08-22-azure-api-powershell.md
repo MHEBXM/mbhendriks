@@ -10,12 +10,12 @@ On this page I will describe how you can use PowerShell to make a call to the RE
 To authenticate to the REST API, we need the id of a user or service principal ($clientid), the corresponding secret ($secretid) and the id of the tenant ($tenantid). The service principal or user should also have assigned the permissions needed to perform the tasks.  
 When we have the $clientid, $secretid and $tenantid, we can authenticate against the REST API.  
 
-##### Construct the URI  
+#### Construct the URI
 First we need to construct the URI to which we are going to authenticate. This URI is constucted the follow way:
 
 $tokenUri = "https://login.microsoftonline.com/$tenantid/oauth2/token"  
 
-#### Construct the body  
+#### Construct the body
 Now we can construct the body. The body will be sent to the URI to which we will authenticate. The body is constructed the follow way:
 
 $tokenBody = @{  
@@ -25,10 +25,12 @@ $tokenBody = @{
     grant_type    = "client_credentials"  
 }  
 
-3) Get OAuth 2.0 Token  
-It is time to get the OAuth token. To perform actions on Azure by using the REST API, the token will be send with the request to the REST API to perform actions on Azure.  
-First we sent a request to get a token:  
+#### Get OAuth 2.0 Token
+It is time to get the OAuth token.  To perform actions on Azure by using the REST API, the token will be send with the request to the REST API to perform actions on Azure.  
+First we sent a request to get a token:
+
 $tokenRequest = Invoke-WebRequest -Method Post -Uri $tokenUri -ContentType "application/x-www-form-urlencoded" -Body $tokenBody -UseBasicParsing  
+
 After that, we can extract the token:  
 $token = ($tokenRequest.Content | ConvertFrom-Json).access_token  
 
