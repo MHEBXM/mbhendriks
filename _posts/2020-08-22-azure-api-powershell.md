@@ -10,12 +10,12 @@ On this page I will describe how you can use PowerShell to make a call to the RE
 To authenticate to the REST API, we need the id of a user or service principal ($clientid), the corresponding secret ($secretid) and the id of the tenant ($tenantid). The service principal or user should also have assigned the permissions needed to perform the tasks.  
 When we have the $clientid, $secretid and $tenantid, we can authenticate against the REST API.  
 
-#### Construct the URI  
+##### Construct the URI  
 First we need to construct the URI to which we are going to authenticate. This URI is constucted the follow way:
 
 $tokenUri = "https://login.microsoftonline.com/$tenantid/oauth2/token"  
 
-2) Construct the body  
+#### Construct the body  
 Now we can construct the body. The body will be sent to the URI to which we will authenticate. The body is constructed the follow way:
 
 $tokenBody = @{  
