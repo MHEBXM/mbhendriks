@@ -71,12 +71,12 @@ $Headers=@{
 And we need to construct the body for the REST API request.  
 The body contains the properties for the resource group, for example:
 
-$body='{
-    "location": "westeurope",
-     "tags": {
-        "owner": "Me",
-        "location": "My City"
-    }
+$body='{  
+    "location": "westeurope",  
+     "tags": {  
+        "owner": "Me",  
+        "location": "My City"  
+    }  
  }'
 
 At last we can put all the pieces together and perform the request to the Azure REST API:
