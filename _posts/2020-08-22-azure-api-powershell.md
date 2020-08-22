@@ -85,6 +85,7 @@ $output = Invoke-RestMethod  -Uri $uri -Headers $Headers -ContentType "applicati
 
 The resource group may be created now, but we are not sure. The first thing we can verify is if the REST API call is succesfull or not. We can verify this by viewing at the value of $output.properties  
 When the output is "succeeded", that  means that de REST API call was succesfull. It does not mean that the resource group is created.  
+
 To verify if the resource group is created we can do a REST API call, like before:
 
 $uri = "https://management.azure.com/subscriptions/$subscriptionid/resourcegroups?api-version=2020-06-01"  
